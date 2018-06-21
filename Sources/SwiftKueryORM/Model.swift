@@ -125,7 +125,7 @@ public extension Model {
   static func createTableSync(using db: Database? = nil) throws -> Bool {
     var result: Bool?
     var error: RequestError?
-    let semaphore = DispatchSemaphore(value: 1)
+    let semaphore = DispatchSemaphore(value: 0)
     createTable(using: db) { res, err in
       result = res
       error = err
@@ -615,9 +615,9 @@ public extension Model {
         }
 
         if let parameters = parameters {
-         connection.execute(query: query, parameters: parameters, onCompletion: executeCompletion)
+            connection.execute(query: query, parameters: parameters, onCompletion: executeCompletion)
         } else {
-         connection.execute(query: query, onCompletion: executeCompletion)
+            connection.execute(query: query, onCompletion: executeCompletion)
         }
       }
     }
@@ -696,9 +696,9 @@ public extension Model {
         }
 
         if let parameters = parameters {
-          connection.execute(query: query, parameters: parameters, onCompletion: executeCompletion)
+            connection.execute(query: query, parameters: parameters, onCompletion: executeCompletion)
         } else {
-          connection.execute(query: query, onCompletion: executeCompletion)
+            connection.execute(query: query, onCompletion: executeCompletion)
         }
       }
     }
@@ -734,9 +734,9 @@ public extension Model {
         }
 
         if let parameters = parameters {
-          connection.execute(query: query, parameters: parameters, onCompletion: executeCompletion)
+            connection.execute(query: query, parameters: parameters, onCompletion: executeCompletion)
         } else {
-          connection.execute(query: query, onCompletion: executeCompletion)
+            connection.execute(query: query, onCompletion: executeCompletion)
         }
       }
     }

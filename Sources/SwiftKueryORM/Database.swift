@@ -55,11 +55,11 @@ public class Database {
         // Create single entry connection pool for thread safety
         let singleConnectionPool = ConnectionPool(options: ConnectionPoolOptions(initialCapacity: 1, maxCapacity: 1, timeout: 10000),
                                                   connectionGenerator: {
-                                                    connection.connect { _ in }
-                                                    if !connection.isConnected {
-                                                        return nil
+                                                    let error = connection.connectSync()
+                                                    guard let _ = error else {
+                                                        return connection
                                                     }
-                                                    return connection
+                                                    return nil
                                                     },
                                                   connectionReleaser: { _ in connection.closeConnection() })
         self.init(singleConnectionPool)
