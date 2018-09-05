@@ -197,7 +197,7 @@ open class DatabaseDecoder {
         return try castedValue(date, type, key)
       } else if type is [String].Type && value != nil {
         let castValue = try castedValue(value, String.self, key)
-        let array = castValue.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "").split(separator: ",")
+        let array = castValue.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "").components(separatedBy: ",")
         return try castedValue(array, type, key)
       } else {
         throw RequestError(.ormDatabaseDecodingError, reason: "Unsupported type: \(String(describing: type)) for value: \(String(describing: value))")
