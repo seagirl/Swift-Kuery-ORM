@@ -66,6 +66,8 @@ fileprivate struct _DatabaseKeyedEncodingContainer<K: CodingKey> : KeyedEncoding
       encoder.values[key.stringValue] = uuidValue.uuidString
     } else if let dateValue = value as? Date {
       encoder.values[key.stringValue] = dateValue.timeIntervalSinceReferenceDate
+    } else if let arrayOfStringValue = value as? [String] {
+      encoder.values[key.stringValue] = "{\(arrayOfStringValue.joined(separator: ","))}"
     } else if value is [Any] {
       throw RequestError(.ormDatabaseEncodingError, reason: "Encoding an array is not currently supported")
     } else if value is [AnyHashable: Any] {

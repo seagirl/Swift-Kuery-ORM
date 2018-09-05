@@ -73,6 +73,8 @@ public class TableInfo {
           }
         case .unkeyed(_ as Data.Type, _):
           valueType = String.self
+        case .unkeyed(_ as [String].Type, _):
+          valueType = String.self
         case .keyed(_ as URL.Type, _):
           valueType = String.self
         case .keyed:
